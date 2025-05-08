@@ -45,18 +45,20 @@
                             <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">IP Address</th>
                             <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">MAC Address</th>
                             <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Hostname</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Vendor</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">OS</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white">
                         {% for device in devices %}
                             <tr>
                                 <td class="px-5 py-5 border-b border-gray-200 text-sm">{{ device.ip }}</td>
-                                <td class="px-5 py-5 border-b border-gray-200 text-sm">{{ device.mac }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                                    {% if device.hostname == "Unknown" %}
+                                        None
+                                    {% else %}
+                                        {{ device.mac }}
+                                    {% endif %}
+                                </td>
                                 <td class="px-5 py-5 border-b border-gray-200 text-sm">{{ device.hostname }}</td>
-                                <td class="px-5 py-5 border-b border-gray-200 text-sm">{{ device.vendor }}</td>
-                                <td class="px-5 py-5 border-b border-gray-200 text-sm">{{ device.os }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
